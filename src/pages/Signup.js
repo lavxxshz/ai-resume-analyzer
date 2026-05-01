@@ -19,7 +19,7 @@ const Signup = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/signup', form);
+      const res = await axios.post('https://ai-resume-analyzer-production-9c81.up.railway.app/api/auth/signup', form);
       login(res.data.user, res.data.token);
       navigate('/dashboard');
     } catch (err) {
