@@ -9,7 +9,7 @@ router.post('/signup', async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ where: { email } });
     if (user) return res.status(400).json({ msg: 'User already exists' });
 
     const salt = await bcrypt.genSalt(10);
@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ where: { email } });
     if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
 
     const isMatch = await bcrypt.compare(password, user.password);
